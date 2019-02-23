@@ -1,0 +1,86 @@
+{
+	"data": {
+		"movies": [{
+				"movieId": 1,
+				"title": "The Green Mile",
+				"voteAverage": 7,
+				"voteCount": 111,
+				"rating": 3,
+				"isWatched": true,
+				"trailer": "u9Mv98Gr5pY",
+				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/sOHqdY1RnSn6kcfAHKu28jvTebE.jpg"
+			},
+			{
+				"movieId": 2,
+				"title": "Creed II",
+				"voteAverage": 5.4,
+				"voteCount": 111,
+				"rating": null,
+				"isWatched": false,
+				"trailer": "SUXWAEX2jlg",
+				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg"
+			},
+			{
+				"movieId": 3,
+				"title": "Mary Queen of Scots",
+				"voteAverage": 2,
+				"voteCount": 111,
+				"rating": 4,
+				"isWatched": true,
+				"trailer": "ctRK-4Vt7dA",
+				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/b5RMzLAyq5QW6GtN9sIeAEMLlBI.jpg"
+			},
+			{
+				"movieId": 4,
+				"title": "Alita Battle Angel",
+				"voteAverage": 6.2,
+				"voteCount": 111,
+				"rating": null,
+				"isWatched": false,
+				"trailer": "SUXWAEX2jlg",
+				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/xRWht48C2V8XNfzvPehyClOvDni.jpg"
+			},
+			{
+				"movieId": 5,
+				"title": "Glass",
+				"voteAverage": 6.7,
+				"voteCount": 111,
+				"rating": 6,
+				"isWatched": true,
+				"trailer": "u9Mv98Gr5pY",
+				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg"
+			},
+			{
+				"movieId": 6,
+				"title": "Bohemian Rhapsody",
+				"voteAverage": 8.1,
+				"voteCount": 111,
+				"rating": null,
+				"isWatched": false,
+				"trailer": "SUXWAEX2jlg",
+				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg"
+			},
+			{
+				"movieId": 7,
+				"title": "Green Book",
+				"voteAverage": 2,
+				"voteCount": 111,
+				"rating": 7.2,
+				"isWatched": true,
+				"trailer": "ctRK-4Vt7dA",
+				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/7BsvSuDQuoqhWmU2fL7W2GOcZHU.jpg"
+			},
+			{
+				"movieId": 8,
+				"title": "Venom",
+				"voteAverage": 6.6,
+				"voteCount": 111,
+				"rating": null,
+				"isWatched": false,
+				"trailer": "u9Mv98Gr5pY",
+				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg"
+			}
+		],
+		"tv": []
+	}
+}
