@@ -1,6 +1,6 @@
 {
 	"tv_shows": [{
-		"tvShow_ID": "number",
+		"tvShow_ID": "id",
 		"isTV": true,
 		"rating": false,
 		"isWatched": false,
@@ -13,7 +13,7 @@
 		"vote_count": 0
 	}],
 	"movies": [{
-		"movieID": "number",
+		"movieID": "id",
 		"isTV": false,
 		"rating": false,
 		"isWatched": false,
