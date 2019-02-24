@@ -1,0 +1,28 @@
+{
+	"tv_shows": [{
+		"id": 0,
+		"isTV": true,
+		"rating": false,
+		"isWatched": false,
+		"originalTitle": "TV show Title",
+		"releaseDate": "2019-02-22",
+		"overview": "This TV show is about family and business PG-13",
+		"poster_path": null,
+		"trailer_path": null,
+		"vote_average": 0,
+		"vote_count": 0
+	}],
+	"movies": [{
+		"id": 0,
+		"isTV": false,
+		"rating": false,
+		"isWatched": false,
+		"originalTitle": "Movie Title",
+		"releaseDate": "2019-02-22",
+		"overview": "This movie is about crime and purnishment PG-13",
+		"poster_path": null,
+		"trailer_path": null,
+		"vote_average": 0,
+		"vote_count": 0
+	}]
+}
