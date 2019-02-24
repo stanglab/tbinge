@@ -1,36 +1,28 @@
-[
-	{
+{
+	"tv_shows": [{
 		"tvShow_ID": 0,
 		"isTV": true,
 		"rating": false,
-		"isWatched": true,
-		"searchKeyword": "bad boy"
-	},
-	{
+		"isWatched": false,
+		"originalTitle": "TV show Title",
+		"releaseDate": "2019-02-22",
+		"overview": "This TV show is about family and business PG-13",
+		"poster_path": null,
+		"trailer_path": null,
+		"vote_average": 0,
+		"vote_count": 0
+	}],
+	"movies": [{
 		"movieID": 0,
+		"isTV": false,
 		"rating": false,
-		"isWatched": true,
-		"searchKeyword": "Major payne"
-	},
-	[
-		{
-			"originalTitle": "Movie Title",
-			"releaseDate": "2019-02-22",
-			"overview": "This movie is about crime",
-			"id": 0,
-			"poster_path": null,
-			"trailer_path": null,
-			"vote_average": 0,
-			"vote_count": 0
-		},
-		{
-			"originalTitle": "TV show Title",
-			"releaseDate": "2019-02-22",
-			"overview": "This TV show is about love",
-			"id": 0,
-			"poster_path": null,
-			"trailer_path": null,
-			"vote_average": 0,
-			"vote_count": 0
-		}
-	]
+		"isWatched": false,
+		"originalTitle": "Movie Title",
+		"releaseDate": "2019-02-22",
+		"overview": "This movie is about crime and purnishment PG-13",
+		"poster_path": null,
+		"trailer_path": null,
+		"vote_average": 0,
+		"vote_count": 0
+	}]
+}
