@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</script>
+function getdata(){
+    let xhttp = newXMLHttpRequest();
+
+    xhttp.onreadystatechange=function(){
+        if(xhttp.radystate==4 && xhttp.status==200){
+
+            let jsonObj = JSON.parse(xhttp.response);
+            document.getElementById('div1').innerHTML = jsonObj.name+" "+jsonObj.des;
+        }
+    }
+    xhttp.open('GET', "index.json", true);
+    xhttp.send();
+    }
+}
+ script>src = "index.js"</script>
+</head>
+</body>
+<input type = "button" name= "name" onclick = "getdata()" value = "Click" />
+<div id = "div1"></div>
+</body>
+</html>
