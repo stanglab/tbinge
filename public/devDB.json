@@ -1,150 +1,26 @@
 {
-	"data": {
-		"tmdbApiInitialSearch": [
-			{
-				"id": 6732,
-				"year": "2011",
-				"title": "Green Lantern",
-				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/zUSEYp9G7Hk9GZIfbPoOiSHvwHV.jpg"
-			},
-			{
-				"id": 45123,
-				"year": "2010",
-				"title": "RED",
-				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/q2mwTRKrq1etP9S4SZVDIJq0wI2.jpg"
-			}
-		],
-		"tmdbApiDetail": {
+	"tmdbApiInitialSearch": [
+		{
 			"id": 6732,
 			"year": "2011",
 			"title": "Green Lantern",
-			"voteAverage": 51,
-			"voteCount": 6654,
-			"trailer": "tRplNRHOtS0",
-			"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/zUSEYp9G7Hk9GZIfbPoOiSHvwHV.jpg",
-			"description": "For centuries, a small but powerful force of warriors called the Green Lantern Corps has sworn to keep intergalactic order. Each Green Lantern wears a ring that grants him superpowers. But when a new enemy called Parallax threatens to destroy the balance of power in the Universe, their fate and the fate of Earth lie in the hands of the first human ever recruited."
-		},
-		"movies": [{
-				"id": 1,
-				"year": "2014",
-				"title": "The Green Mile",
-				"voteAverage": 7,
-				"voteCount": 111,
-				"rating": 3,
-				"isWatched": true,
-				"trailer": "u9Mv98Gr5pY",
-				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/sOHqdY1RnSn6kcfAHKu28jvTebE.jpg",
-				"description": "This is where the movie description will go. Generally it is a few sentences long and contains a bit of fun chat about the movie."
-			},
-			{
-				"id": 2,
-				"year": "2014",
-				"title": "Creed II",
-				"voteAverage": 5.4,
-				"voteCount": 111,
-				"rating": null,
-				"isWatched": false,
-				"trailer": "SUXWAEX2jlg",
-				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/v3QyboWRoA4O9RbcsqH8tJMe8EB.jpg",
-				"description": "This is where the movie description will go. Generally it is a few sentences long and contains a bit of fun chat about the movie."
-			},
-			{
-				"id": 3,
-				"year": "2014",
-				"title": "Mary Queen of Scots",
-				"voteAverage": 2,
-				"voteCount": 111,
-				"rating": 4,
-				"isWatched": true,
-				"trailer": "ctRK-4Vt7dA",
-				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/b5RMzLAyq5QW6GtN9sIeAEMLlBI.jpg",
-				"description": "This is where the movie description will go. Generally it is a few sentences long and contains a bit of fun chat about the movie."
-			},
-			{
-				"id": 4,
-				"year": "2014",
-				"title": "Alita Battle Angel",
-				"voteAverage": 6.2,
-				"voteCount": 111,
-				"rating": null,
-				"isWatched": false,
-				"trailer": "SUXWAEX2jlg",
-				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/xRWht48C2V8XNfzvPehyClOvDni.jpg",
-				"description": "This is where the movie description will go. Generally it is a few sentences long and contains a bit of fun chat about the movie."
-			},
-			{
-				"id": 5,
-				"year": "2014",
-				"title": "Glass",
-				"voteAverage": 6.7,
-				"voteCount": 111,
-				"rating": 6,
-				"isWatched": true,
-				"trailer": "u9Mv98Gr5pY",
-				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/svIDTNUoajS8dLEo7EosxvyAsgJ.jpg",
-				"description": "This is where the movie description will go. Generally it is a few sentences long and contains a bit of fun chat about the movie."
-			},
-			{
-				"id": 6,
-				"year": "2014",
-				"title": "Bohemian Rhapsody",
-				"voteAverage": 8.1,
-				"voteCount": 111,
-				"rating": null,
-				"isWatched": false,
-				"trailer": "SUXWAEX2jlg",
-				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/lHu1wtNaczFPGFDTrjCSzeLPTKN.jpg",
-				"description": "This is where the movie description will go. Generally it is a few sentences long and contains a bit of fun chat about the movie."
-			},
-			{
-				"id": 7,
-				"year": "2014",
-				"title": "Green Book",
-				"voteAverage": 2,
-				"voteCount": 111,
-				"rating": 7.2,
-				"isWatched": true,
-				"trailer": "ctRK-4Vt7dA",
-				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/7BsvSuDQuoqhWmU2fL7W2GOcZHU.jpg",
-				"description": "This is where the movie description will go. Generally it is a few sentences long and contains a bit of fun chat about the movie."
-			},
-			{
-				"id": 8,
-				"year": "2014",
-				"title": "Venom",
-				"voteAverage": 6.6,
-				"voteCount": 111,
-				"rating": null,
-				"isWatched": false,
-				"trailer": "u9Mv98Gr5pY",
-				"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg",
-				"description": "This is where the movie description will go. Generally it is a few sentences long and contains a bit of fun chat about the movie."
-			}
-		],
-		"tv": [{
-			"id": 234,
-			"year": "2007",
-			"title": "The Big Bang Theory",
-			"voteAverage": 68,
-			"voteCount": 2342,
-			"rating": 4.5,
-			"isWatched": true,
-			"trailer": "WBb3fojgW0Q",
-			"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/ooBGRQBdbGzBxAVfExiO8r7kloA.jpg",
-			"description": "The Big Bang Theory is centered on five characters living in Pasadena, California: roommates Leonard Hofstadter and Sheldon Cooper; Penny, a waitress and aspiring actress who lives across the hall; and Leonard and Sheldon's equally geeky and socially awkward friends and co-workers, mechanical engineer Howard Wolowitz and astrophysicist Raj Koothrappali. The geekiness and intellect of the four guys is contrasted for comic effect with Penny's social skills and common sense."
+			"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/zUSEYp9G7Hk9GZIfbPoOiSHvwHV.jpg"
 		},
 		{
-			"id": 4687,
-			"year": "2012",
-			"title": "Arrow",
-			"voteAverage": 59,
-			"voteCount": 1238,
-			"rating": 4.5,
-			"isWatched": false,
-			"trailer": "hTv13EjlLNg",
-			"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/mo0FP1GxOFZT4UDde7RFDz5APXF.jpg",
-			"description": "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow."
+			"id": 45123,
+			"year": "2010",
+			"title": "RED",
+			"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/q2mwTRKrq1etP9S4SZVDIJq0wI2.jpg"
 		}
-	]
+	],
+	"tmdbApiDetail": {
+		"id": 6732,
+		"year": "2011",
+		"title": "Green Lantern",
+		"voteAverage": 51,
+		"voteCount": 6654,
+		"trailer": "tRplNRHOtS0",
+		"poster": "https://image.tmdb.org/t/p/w600_and_h900_bestv2/zUSEYp9G7Hk9GZIfbPoOiSHvwHV.jpg",
+		"description": "For centuries, a small but powerful force of warriors called the Green Lantern Corps has sworn to keep intergalactic order. Each Green Lantern wears a ring that grants him superpowers. But when a new enemy called Parallax threatens to destroy the balance of power in the Universe, their fate and the fate of Earth lie in the hands of the first human ever recruited."
 	}
 }
