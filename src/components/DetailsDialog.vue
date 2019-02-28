@@ -44,6 +44,7 @@
           :value="isWatched"
           hide-details
           align-center
+          @change="toggleWatched"
         ></v-switch>
       </span>
     </v-card-actions>
@@ -78,6 +79,11 @@ export default {
     // TODO: Set New Rating
 
     // TODO: Set Watched Status
+    toggleWatched () {
+      // TODO: Get current params (snap movie type)
+      this.$store.dispatch('toggleWatched', this.id, 'movies')
+      this.$store.dispatch('updateDatabase')
+    }
   }
 }
 </script>
