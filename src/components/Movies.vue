@@ -15,7 +15,7 @@
         <v-layout row wrap>
           <v-flex v-for="movie in filteredList" :key="movie.id" xs4 md2 lg1 d-flex class="movie-img">
             <v-card flat tile color="transparent">
-              <v-img :src="movie.poster" :aspect-ratio="2/3" @click.prevent="selectMovie(movie.id)"></v-img>
+              <v-img :src="movie.poster" :aspect-ratio="2/3" @click.prevent="viewMovie(movie.id)"></v-img>
               <v-card-actions>
                 <p class="body-1 mb-0">{{ movie.title }}</p>
               </v-card-actions>
@@ -79,7 +79,7 @@
           </v-layout>
           <v-divider light></v-divider>
           <v-card-actions class="pa-2">
-            <v-btn flat small @click.prevent="viewTmdbDetail(result.id)">
+            <v-btn flat small @click.prevent="getTmdbDetail(result.id)">
               Details
             </v-btn>
             <v-spacer></v-spacer>
@@ -92,61 +92,105 @@
     </v-navigation-drawer>
 
     <v-dialog v-model="isDialogDisplayed" transition="dialog-bottom-transition" lazy>
-      <DetailsDialog @cancel="isDialogDisplayed = false" @delete="isDialogDisplayed = false" v-bind="this.$store.state.selectedDetail"/>
+      <DetailsDialog @cancel="isDialogDisplayed = false" @delete="isDialogDisplayed = false" v-bind="itemDetails"/>
     </v-dialog>
   </v-layout>
 </template>
 
 <script>
+// TODO: REMOVE WHEN API IMPLEMENTED
+import fs from 'fs'
+// TODO: REMOVE WHEN API IMPLEMENTED
+import path from 'path'
 import DetailsDialog from '@/components/DetailsDialog'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
     DetailsDialog
   },
   data: () => ({
+    devData: {
+      'tmdbApiInitialSearch': [
+        {
+          'id': 6732,
+          'year': '2011',
+          'title': 'Green Lantern',
+          'poster': 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/zUSEYp9G7Hk9GZIfbPoOiSHvwHV.jpg'
+        },
+        {
+          'id': 45123,
+          'year': '2010',
+          'title': 'RED',
+          'poster': 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/q2mwTRKrq1etP9S4SZVDIJq0wI2.jpg'
+        }
+      ],
+      'tmdbApiDetail': [
+        {
+          'id': 6732,
+          'mediaType': 'movie',
+          'year': '2011',
+          'title': 'Green Lantern',
+          'voteAverage': 51,
+          'voteCount': 6654,
+          'trailer': 'tRplNRHOtS0',
+          'poster': 'https://image.tmdb.org/t/p/w600_and_h900_bestv2/zUSEYp9G7Hk9GZIfbPoOiSHvwHV.jpg',
+          'description': 'For centuries, a small but powerful force of warriors called the Green Lantern Corps has sworn to keep intergalactic order. Each Green Lantern wears a ring that grants him superpowers. But when a new enemy called Parallax threatens to destroy the balance of power in the Universe, their fate and the fate of Earth lie in the hands of the first human ever recruited.'
+        }
+      ]
+    },
+    itemDetails: null,
     isDialogDisplayed: false,
-    localMovies: [],
     drawer: null,
     searchInput: '',
     searchInputTmdb: ''
   }),
   created () {
     // Retrieve list of local movies from the store
-    this.localMovies = this.$store.state.localData.movies
+    this.$store.dispatch('loadDatabase')
+
+    // TODO: REMOVE WHEN API IMPLEMENTED
+    const publicFolder = path.resolve('./public')
+    fs.readFile(path.join(publicFolder, 'devDB.json'), 'utf8', (err, data) => {
+      if (err) alert(err.message)
+      this.devData = JSON.parse(data)
+    })
   },
   computed: {
+    ...mapGetters([
+      'getSelectedDetail',
+      'getMovies',
+      'filterById',
+      'filterByTitle'
+    ]),
     filteredList () {
-      return this.localMovies.filter(movie => {
-        return movie.title.toLowerCase().includes(this.searchInput.toLowerCase())
-      })
+      this.$store.dispatch('updateSearchInput', this.searchInput)
+      // FIXME: Return filtered movie list
+      return this.filterByTitle
     },
     filterTmdbList () {
       // TODO: Tie in API call
-      return this.$store.state.localData.tmdbApiInitialSearch.filter(movie => {
+      return this.devData.tmdbApiInitialSearch.filter(movie => {
         return movie.title.toLowerCase().includes(this.searchInputTmdb.toLowerCase())
       })
     }
   },
   methods: {
-    selectMovie (id) {
-      // Filter local movies array and set the selected details to store
-      this.$store.state.selectedDetail = this.localMovies.filter(movie => movie.id === id)[0]
-      // Open dialog display
+    viewMovie (givenId) {
+      this.$store.dispatch('updateDetailById', givenId)
+      this.itemDetails = this.getSelectedDetail
       this.isDialogDisplayed = true
     },
-    viewTmdbDetail (id) {
-      // TODO: Tie in API call
-      // Set the selected details to store
-      this.$store.state.selectedDetail = this.$store.state.localData.tmdbApiDetail
-      // Open dialog display
+    getTmdbDetail (givenId) {
+      // TODO: Tie in API call via passed id and update store detail
+      this.$store.state.selectedDetail = this.devData.tmdbApiDetail
       this.isDialogDisplayed = true
     },
-    addTmdbMovie (id) {
+    addTmdbMovie (givenId) {
       // TODO: Tie in API call to get full details
       // Set API return values to local movies DB
-      let newMovie = this.$store.state.localData.tmdbApiDetail
-      this.localMovies.push(newMovie)
+      let newMovie = this.devData.tmdbApiDetail
+      this.$store.dispatch('pushToData', newMovie)
     }
   }
 }
