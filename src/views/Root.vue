@@ -43,9 +43,6 @@
 </template>
 
 <script>
-import fs from 'fs'
-import path from 'path'
-
 export default {
   data: () => ({
     dark: true,
@@ -63,13 +60,7 @@ export default {
     footer: {
       inset: true
     }
-  }),
-  created () {
-    // Read in local database and store it
-    // eslint-disable-next-line
-    let jsonFile = JSON.parse(fs.readFileSync(path.join(__static, '/devDB.json'), 'utf8'))
-    this.$store.commit('change', jsonFile.data)
-  }
+  })
 }
 </script>
 
