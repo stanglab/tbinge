@@ -113,7 +113,7 @@ export default {
   }),
   created () {
     // Retrieve list of local tv from the store
-    this.localTv = this.$store.state.localData.tv
+    this.localTv = this.$store.getters.tv
   },
   computed: {
     filteredList () {
@@ -123,7 +123,7 @@ export default {
     },
     filterTmdbList () {
       // TODO: Tie in API call
-      return this.$store.state.localData.tmdbApiInitialSearch.filter(show => {
+      return this.$store.getters.devData.tmdbApiInitialSearch.filter(show => {
         return show.title.toLowerCase().includes(this.searchInputTmdb.toLowerCase())
       })
     }
@@ -131,21 +131,21 @@ export default {
   methods: {
     selectTv (id) {
       // Filter local tv array and set the selected details to store
-      this.$store.state.selectedDetail = this.localTv.filter(show => show.id === id)[0]
+      this.$store.commit('SET_DETAILS', this.localTv.filter(tv => tv.id === id)[0])
       // Open dialog display
       this.isDialogDisplayed = true
     },
     viewTmdbDetail (id) {
       // TODO: Tie in API call
       // Set the selected details to store
-      this.$store.state.selectedDetail = this.$store.state.localData.tmdbApiDetail
+      this.$store.commit('SET_DETAILS', this.$store.getters.devData.tmdbApiDetail)
       // Open dialog display
       this.isDialogDisplayed = true
     },
     addTmdbTv (id) {
       // TODO: Tie in API call to get full details
       // Set API return values to local tv DB
-      let newTvShow = this.$store.state.localData.tmdbApiDetail
+      let newTvShow = this.$store.getters.devData.tmdbApiDetail
       this.localTv.push(newTvShow)
     }
   }
