@@ -128,8 +128,7 @@ export default {
     errorMessage: ''
   }),
   created () {
-    const publicFolder = path.resolve('./public')
-    fs.readFile(path.join(publicFolder, 'database.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__static, 'database.json'), 'utf8', (err, data) => {
       if (err) alert(err.message)
       this.movies = JSON.parse(data).filter(items => items.mediaType === 'movie')
     })
@@ -170,19 +169,20 @@ export default {
       })
     },
     addTmdbMovie (givenId) {
-      // this.movies.push(this.searchResults.filter(results => results.id === givenId)[0])
-      const movieToAdd = this.searchResults.filter(results => results.id === givenId)[0]
-      let database = []
-      const publicFolder = path.resolve('./public')
-      fs.readFile(path.join(publicFolder, 'database.json'), 'utf8', (err, data) => {
-        if (err) alert(err.message)
-        data.push(JSON.stringify(mediaType, 'movie'))
-        database = JSON.parse(data)
-      },
-
-      database.push(movieToAdd),
-
-      fs.writeFileSync(path.join(publicFolder, 'database.json'), JSON.stringify(database), 'utf8').catch(err => alert(err.message)))
+      const movieToAdd = this.searchResults.find(results => results.id === givenId)
+      movieToAdd.mediaType = 'movie'
+      fs.readFile(path.join(__static, 'database.json'), 'utf8', (err, data) => {
+        if (err) {
+          alert(err.message)
+        }
+        const database = JSON.parse(data)
+        database.push(movieToAdd)
+        fs.writeFile(path.join(__static, 'database.json'), JSON.stringify(database), 'utf8', (err, data) => {
+          if (err) {
+            alert(err.message)
+          }
+        })
+      })
     },
     getPosterURL (posterPath) {
       return 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + posterPath

@@ -128,8 +128,7 @@ export default {
     errorMessage: ''
   }),
   created () {
-    const publicFolder = path.resolve('./public')
-    fs.readFile(path.join(publicFolder, 'database.json'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__static, 'database.json'), 'utf8', (err, data) => {
       if (err) alert(err.message)
       this.tv = JSON.parse(data).filter(items => items.mediaType === 'tv')
     })
@@ -169,16 +168,20 @@ export default {
       })
     },
     addTmdbTv (givenId) {
-      // this.tv.push(this.searchResults.filter(results => results.id === givenId)[0])
-
-      const publicFolder = path.resolve('./public')
-      var obj = require(path.join(publicFolder, 'database.json'))
-      obj.push('thing!')
-      // fs.writeFile(path.join(publicFolder, 'database.json'), JSON.stringify(obj), function (err) {
-      //   console.log(err)
-      // })
-
-      // fs.writeFileSync(path.join(publicFolder, 'database.json'), JSON.stringify(), 'utf8').catch(err => alert(err.message))
+      const tvToAdd = this.searchResults.find(results => results.id === givenId)
+      tvToAdd.mediaType = 'tv'
+      fs.readFile(path.join(__static, 'database.json'), 'utf8', (err, data) => {
+        if (err) {
+          alert(err.message)
+        }
+        const database = JSON.parse(data)
+        database.push(tvToAdd)
+        fs.writeFile(path.join(__static, 'database.json'), JSON.stringify(database), 'utf8', (err, data) => {
+          if (err) {
+            alert(err.message)
+          }
+        })
+      })
     },
     getPosterURL (posterPath) {
       return 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + posterPath
