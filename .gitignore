@@ -25,3 +25,4 @@ yarn-error.log*
 
 #TMDB Authentication File
 src/tmdb/authentication.json
+public/authentication.json
