@@ -5,16 +5,11 @@
 *  Author: Kyle McCain
 *  Date: 19 February 2019
 */
-const fs = require('fs')
 const request = require('request')
-const path = require('path')
 
 // Declare and initialize TMDb API variables
-const tmdbFolder = path.resolve('./public')
-const authentication = JSON.parse(fs.readFileSync(path.join(tmdbFolder, 'authentication.json'), 'utf8', (err, data) => {
-  if (err) alert(err.message)
-  else return data
-}))
+// eslint-disable-next-line
+const authentication = { 'api_key': '' }
 const baseURL = 'https://api.themoviedb.org/3/'
 
 // Declare and initialize new error to throw if required parameter is not input
