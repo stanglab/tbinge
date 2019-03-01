@@ -5,28 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-</head>
-<body>
-    let dName = req.query.dataName;
-    let jsonObj;
-fs.readFile('index.json', utf8, function(err, data){
-    if(err){
+const fs = require('fs')
+        const { dialog } = require('electron').remote
+        export default {
+            name: 'Fstest',
+            data() {
+                return {
+                    newFileName: null,
+                    fileContents: null,
+                    filePath: null,
+                    confirmSave: true,
+                    failedSave: true,
+                    errMsg: null
+                 }
+                },
+       methods: {
+         readFile() {
+           let types = [{ name: '', extensions: ['json'] }]
+           let options = { filters: types, properties: ['openFile'] }
+           this.path = dialog.showOpenDialog(options, (filePaths) => {
+          if (filePaths === undefined) return
+         this.filePath = filePaths[0]
+        fs.readFile('index.json', utf8, function (err, data) {
+         if (err) {
         console.log(err);
-    }else {
-        jsonObj = JSON.parse(data);
-        for (let i=0;i<jsonObj.length;i++){
-            if(jsonObj[i].name==dName){
+        }else {
+        jsonObj = JSON.parse(data)
+        this.fileContents = JSON.stringify(jsonObj, null, '\t')
+        }
+    })
+},
 
-                //prepare data for writting
-                let newdata = JSON.stringify(jsonObj);
-                fs.writeFile('index.json', newdata, 'utf-8', function(err){
-                    if (err) throw err;
+//prepare data for writting  
+  updateFile() {
+  let types = [{ name: 'index.json', extensions: ['json'] }]
+  
+    fs.writeFile('index.json', utf8, function (err, data){
+        if (err === null) {
+            this.confirmSave = !this.confirmSave
+            setTimeout(() => this.confirmSave = !this.confirmSave, 1000)
+            this.save = !this.save
+    
                 })
 
             }
         }
     }
 }
-<script>src="index.js"</script>
+<script>src="index.json"</script>
 </body>
 </html>
