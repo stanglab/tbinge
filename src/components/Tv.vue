@@ -51,7 +51,7 @@
               solo-inverted
               hide-details
               prepend-inner-icon="search"
-              label="TMDB TV"
+              label="TMDB TV Shows"
               v-model="searchInputTmdb"
             ></v-text-field>
           </v-list-tile-content>
@@ -70,8 +70,8 @@
         <v-card color="secondary lighten-2" class="white--text ma-2 pa-1">
           <v-layout>
             <v-flex xs5>
-              <v-img v-if="!(result.poster_path===null)"
-                :src=getPosterURL(result.poster_path)
+              <v-img v-if="!(result.poster_path === null)"
+                :src="getPosterURL(result.poster_path)"
                 height="125px"
                 contain
               ></v-img>
@@ -80,7 +80,7 @@
               <v-card-title primary-title>
                 <div>
                   <div class="headline">{{result.name}}</div>
-                  <div v-if="!(result.first_air_date==='')">({{ result.first_air_date.substring(0, 4) }})</div>
+                  <div v-if="!(result.release_date === '')">({{ result.release_date.substring(0, 4) }})</div>
                 </div>
               </v-card-title>
             </v-flex>
@@ -100,7 +100,7 @@
     </v-navigation-drawer>
 
     <v-dialog v-model="isDialogDisplayed" transition="dialog-bottom-transition" lazy>
-      <DetailsDialog @cancel="isDialogDisplayed = false" @delete="isDialogDisplayed = false" v-bind="this.$store.state.selectedDetail"/>
+      <DetailsDialog @cancel="isDialogDisplayed = false" @delete="isDialogDisplayed = false" v-bind="this.selectedDetail"/>
     </v-dialog>
   </v-layout>
 </template>
@@ -109,6 +109,8 @@
 import DetailsDialog from '@/components/DetailsDialog'
 import debounce from 'lodash/debounce'
 import tmdbSearch from '@/tmdb/search'
+import fs from 'fs'
+import path from 'path'
 
 export default {
   components: {
@@ -117,7 +119,8 @@ export default {
   data: () => ({
     isDialogDisplayed: false,
     isSearchError: false,
-    localTv: [],
+    selectedDetail: null,
+    tv: [],
     searchResults: [],
     drawer: null,
     searchInput: '',
@@ -125,15 +128,17 @@ export default {
     errorMessage: ''
   }),
   created () {
-    // Retrieve list of local tv from the store
-    this.localTv = this.$store.state.localData.tv
-    // Set timeout for the tmdb TV search
+    const publicFolder = path.resolve('./public')
+    fs.readFile(path.join(publicFolder, 'database.json'), 'utf8', (err, data) => {
+      if (err) alert(err.message)
+      this.tv = JSON.parse(data).filter(items => items.mediaType === 'tv')
+    })
     this.debouncedSearchTMDB = debounce(this.searchTMDB, 1500)
   },
   computed: {
     filteredList () {
-      return this.localTv.filter(show => {
-        return show.title.toLowerCase().includes(this.searchInput.toLowerCase())
+      return this.tv.filter(tv => {
+        return tv.title.toLowerCase().includes(this.searchInput.toLowerCase())
       })
     }
   },
@@ -143,38 +148,37 @@ export default {
     }
   },
   methods: {
-    selectTv (id) {
-      // Filter local tv array and set the selected details to store
-      this.$store.state.selectedDetail = this.localTv.filter(show => show.id === id)[0]
-      // Open dialog display
+    selectTv (givenId) {
+      this.selectedDetail = this.tv.filter(tv => tv.id === givenId)[0]
       this.isDialogDisplayed = true
     },
-    viewTmdbDetail (id) {
-      // TODO: Tie in API call
-      // Set the selected details to store
-      this.$store.state.selectedDetail = this.$store.state.localData.tmdbApiDetail
-      // Open dialog display
+    viewTmdbDetail (givenId) {
+      this.selectedDetail = this.searchResults.tmdbApiDetail
       this.isDialogDisplayed = true
     },
     searchTMDB () {
-      // Reset error message whenever a new search is ran
       this.errorMessage = ''
       this.isSearchError = false
 
-      tmdbSearch.searchTMDB(this.searchInputTmdb, true, (errorMessage, searchResults) => {
+      tmdbSearch.searchTMDB(this.searchInputTmdb, false, (errorMessage, searchResults) => {
         if (errorMessage) {
           this.errorMessage = errorMessage
           this.isSearchError = true
-        } else {
-          this.searchResults = searchResults.results
         }
+        this.searchResults = searchResults.results
       })
     },
-    addTmdbTv (id) {
-      // TODO: Tie in API call to get full details
-      // Set API return values to local tv DB
-      let newTvShow = this.$store.state.localData.tmdbApiDetail
-      this.localTv.push(newTvShow)
+    addTmdbTv (givenId) {
+      // this.tv.push(this.searchResults.filter(results => results.id === givenId)[0])
+
+      const publicFolder = path.resolve('./public')
+      var obj = require(path.join(publicFolder, 'database.json'))
+      obj.push('thing!')
+      // fs.writeFile(path.join(publicFolder, 'database.json'), JSON.stringify(obj), function (err) {
+      //   console.log(err)
+      // })
+
+      // fs.writeFileSync(path.join(publicFolder, 'database.json'), JSON.stringify(), 'utf8').catch(err => alert(err.message))
     },
     getPosterURL (posterPath) {
       return 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + posterPath

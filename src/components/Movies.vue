@@ -70,8 +70,8 @@
         <v-card color="secondary lighten-2" class="white--text ma-2 pa-1">
           <v-layout>
             <v-flex xs5>
-              <v-img v-if="!(result.poster_path===null)"
-                :src=getPosterURL(result.poster_path)
+              <v-img v-if="!(result.poster_path === null)"
+                :src="getPosterURL(result.poster_path)"
                 height="125px"
                 contain
               ></v-img>
@@ -80,7 +80,7 @@
               <v-card-title primary-title>
                 <div>
                   <div class="headline">{{result.title}}</div>
-                  <div v-if="!(result.release_date==='')">({{ result.release_date.substring(0, 4) }})</div>
+                  <div v-if="!(result.release_date === '')">({{ result.release_date.substring(0, 4) }})</div>
                 </div>
               </v-card-title>
             </v-flex>
@@ -100,7 +100,7 @@
     </v-navigation-drawer>
 
     <v-dialog v-model="isDialogDisplayed" transition="dialog-bottom-transition" lazy>
-      <DetailsDialog @cancel="isDialogDisplayed = false" @delete="isDialogDisplayed = false" v-bind="this.$store.state.selectedDetail"/>
+      <DetailsDialog @cancel="isDialogDisplayed = false" @delete="isDialogDisplayed = false" v-bind="this.selectedDetail"/>
     </v-dialog>
   </v-layout>
 </template>
@@ -109,6 +109,8 @@
 import DetailsDialog from '@/components/DetailsDialog'
 import debounce from 'lodash/debounce'
 import tmdbSearch from '@/tmdb/search'
+import fs from 'fs'
+import path from 'path'
 
 export default {
   components: {
@@ -117,7 +119,8 @@ export default {
   data: () => ({
     isDialogDisplayed: false,
     isSearchError: false,
-    localMovies: [],
+    selectedDetail: null,
+    movies: [],
     searchResults: [],
     drawer: null,
     searchInput: '',
@@ -125,14 +128,16 @@ export default {
     errorMessage: ''
   }),
   created () {
-    // Retrieve list of local movies from the store
-    this.localMovies = this.$store.state.localData.movies
-    // Set timeout for the tmdb movie search
+    const publicFolder = path.resolve('./public')
+    fs.readFile(path.join(publicFolder, 'database.json'), 'utf8', (err, data) => {
+      if (err) alert(err.message)
+      this.movies = JSON.parse(data).filter(items => items.mediaType === 'movie')
+    })
     this.debouncedSearchTMDB = debounce(this.searchTMDB, 1500)
   },
   computed: {
     filteredList () {
-      return this.localMovies.filter(movie => {
+      return this.movies.filter(movie => {
         return movie.title.toLowerCase().includes(this.searchInput.toLowerCase())
       })
     }
@@ -143,21 +148,16 @@ export default {
     }
   },
   methods: {
-    selectMovie (id) {
-      // Filter local movies array and set the selected details to store
-      this.$store.state.selectedDetail = this.localMovies.filter(movie => movie.id === id)[0]
-      // Open dialog display
+    selectMovie (givenId) {
+      this.selectedDetail = this.movies.filter(movie => movie.id === givenId)[0]
       this.isDialogDisplayed = true
     },
-    viewTmdbDetail (id) {
-      // TODO: Tie in API call
-      // Set the selected details to store
-      this.$store.state.selectedDetail = this.$store.state.localData.tmdbApiDetail
-      // Open dialog display
+    viewTmdbDetail (givenId) {
+      this.selectedDetail = this.searchResults.filter(results => results.id === givenId)[0]
+      console.log(this.selectedDetail)
       this.isDialogDisplayed = true
     },
     searchTMDB () {
-      // Reset error message whenever a new search is ran
       this.errorMessage = ''
       this.isSearchError = false
 
@@ -165,16 +165,24 @@ export default {
         if (errorMessage) {
           this.errorMessage = errorMessage
           this.isSearchError = true
-        } else {
-          this.searchResults = searchResults.results
         }
+        this.searchResults = searchResults.results
       })
     },
-    addTmdbMovie (id) {
-      // TODO: Tie in API call to get full details
-      // Set API return values to local movies DB
-      let newMovie = this.$store.state.localData.tmdbApiDetail
-      this.localMovies.push(newMovie)
+    addTmdbMovie (givenId) {
+      // this.movies.push(this.searchResults.filter(results => results.id === givenId)[0])
+      const movieToAdd = this.searchResults.filter(results => results.id === givenId)[0]
+      let database = []
+      const publicFolder = path.resolve('./public')
+      fs.readFile(path.join(publicFolder, 'database.json'), 'utf8', (err, data) => {
+        if (err) alert(err.message)
+        data.push(JSON.stringify(mediaType, 'movie'))
+        database = JSON.parse(data)
+      },
+
+      database.push(movieToAdd),
+
+      fs.writeFileSync(path.join(publicFolder, 'database.json'), JSON.stringify(database), 'utf8').catch(err => alert(err.message)))
     },
     getPosterURL (posterPath) {
       return 'https://image.tmdb.org/t/p/w600_and_h900_bestv2' + posterPath
