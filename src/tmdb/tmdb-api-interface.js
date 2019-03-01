@@ -10,7 +10,7 @@ const request = require('request')
 const path = require('path')
 
 // Declare and initialize TMDb API variables
-const tmdbFolder = path.resolve('./src/tmdb')
+const tmdbFolder = path.resolve('./public')
 const authentication = JSON.parse(fs.readFileSync(path.join(tmdbFolder, 'authentication.json'), 'utf8', (err, data) => {
   if (err) alert(err.message)
   else return data
