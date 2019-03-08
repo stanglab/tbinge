@@ -10,6 +10,9 @@ Tbinge is a desktop application written in Electron/Node.js that serves as a loc
 - Removing a movie or TV show from local database
 - Operating in an offline setting (no TMDB searching)
 
+## Designs and Documentation
+https://drive.google.com/drive/folders/1LmqRI_F7p-dqeaX98teTnTx5na6GI2en?usp=sharing
+
 ## Project setup
 
 ```bash
